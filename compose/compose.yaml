@@ -1,0 +1,35 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ojp-poc-postgres
+    environment:
+      POSTGRES_DB: appdb
+      POSTGRES_USER: appadmin
+      POSTGRES_PASSWORD: appadmin
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U appadmin -d appdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  ojp:
+    image: rrobetti/ojp:0.4.14-beta
+    container_name: ojp-poc-ojp
+    environment:
+      OJP_PORT: "1059"
+      OJP_LOG_LEVEL: "INFO"
+    ports:
+      - "1059:1059"
+    volumes:
+      - ./ojp-libs:/opt/ojp/ojp-libs
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pgdata:
