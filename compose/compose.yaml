@@ -20,9 +20,8 @@ services:
   ojp:
     image: rrobetti/ojp:0.4.14-beta
     container_name: ojp-poc-ojp
-    environment:
-      OJP_PORT: "1059"
-      OJP_LOG_LEVEL: "INFO"
+    env_file:
+      - ./ojp.env
     ports:
       - "1059:1059"
     volumes:
