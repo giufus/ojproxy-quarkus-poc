@@ -59,6 +59,12 @@
             <version>${ojp.driver.version}</version>
         </dependency>
 
+        <!-- Estensione Quarkus PostgreSQL — usata solo con il profilo "direct" (bypass OJP). -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jdbc-postgresql</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-opentelemetry</artifactId>

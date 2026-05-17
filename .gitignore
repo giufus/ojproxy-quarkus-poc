@@ -25,3 +25,4 @@ jmeter.log*
 # agents
 .claude/
 .codex/
+TEMP.md

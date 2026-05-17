@@ -53,11 +53,16 @@
             <artifactId>quarkus-agroal</artifactId>
         </dependency>
 
-        <!-- The ONLY JDBC driver on the runtime classpath. -->
         <dependency>
             <groupId>org.openjproxy</groupId>
             <artifactId>ojp-jdbc-driver</artifactId>
             <version>${ojp.driver.version}</version>
+        </dependency>
+
+        <!-- Estensione Quarkus PostgreSQL — usata solo con il profilo "direct" (bypass OJP). -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jdbc-postgresql</artifactId>
         </dependency>
 
         <dependency>

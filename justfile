@@ -52,6 +52,23 @@ dev-all:
     mvn -f product-service/pom.xml quarkus:dev &
     wait
 
+# Run user-service in dev mode with profilo "direct" (connessione diretta a Postgres, bypass OJP).
+dev-user-direct:
+    mvn -f user-service/pom.xml quarkus:dev -Dquarkus.profile=direct
+
+# Run product-service in dev mode with profilo "direct" (connessione diretta a Postgres, bypass OJP).
+dev-product-direct:
+    mvn -f product-service/pom.xml quarkus:dev -Dquarkus.profile=direct
+
+# Run entrambi i servizi in modalità "direct" (bypass OJP) concorrentemente.
+dev-all-direct:
+    #!/usr/bin/env bash
+    set -e
+    trap 'kill $(jobs -p) 2>/dev/null; exit' INT TERM EXIT
+    mvn -f user-service/pom.xml quarkus:dev -Dquarkus.profile=direct &
+    mvn -f product-service/pom.xml quarkus:dev -Dquarkus.profile=direct &
+    wait
+
 # Run unit tests for both services (no stack required).
 test:
     mvn -f user-service/pom.xml test
