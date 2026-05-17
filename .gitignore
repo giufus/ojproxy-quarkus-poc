@@ -18,3 +18,10 @@ compose/.env
 # OJP libs are downloaded by `just init-ojp-libs`; keep the directory tracked but ignore the contents
 compose/ojp-libs/*.jar
 !compose/ojp-libs/.gitkeep
+
+# logs
+jmeter.log*
+
+# agents
+.claude/
+.codex/

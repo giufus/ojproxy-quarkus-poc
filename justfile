@@ -68,6 +68,14 @@ it:
     mvn -f user-service/pom.xml verify
     mvn -f product-service/pom.xml verify
 
+# Open Grafana in the default browser (http://localhost:3000).
+obs:
+    @command -v xdg-open >/dev/null && xdg-open http://localhost:3000 || echo "Open http://localhost:3000"
+
+# Tail observability stack logs (collector, tempo, loki, prometheus, grafana).
+obs-logs:
+    {{COMPOSE}} -f compose/compose.yaml logs -f otel-collector tempo loki prometheus grafana
+
 # Package both services.
 build:
     mvn -f user-service/pom.xml package
